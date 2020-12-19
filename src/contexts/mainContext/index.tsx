@@ -6,6 +6,8 @@ import React, {
 const reducerInit: State = {
   people: [],
   nextPeople: null,
+  peopleError: null,
+  planetsError: null,
   peopleLoading: false,
   previousPeople: null,
   planetsMap: new Map(),
@@ -34,8 +36,16 @@ function mainReducer(state: State, action: Action): State {
       return {
         ...state,
         nextPeople: null,
+        peopleError: null,
         peopleLoading: true,
         previousPeople: null,
+      }
+
+    case 'failurePeople':
+      return {
+        ...state,
+        peopleLoading: false,
+        peopleError: action.error
       }
 
     case 'updatePlanets':
@@ -47,6 +57,7 @@ function mainReducer(state: State, action: Action): State {
     case 'requestPlanets':
       return {
         ...state,
+        planetsError: null,
         planetsLoading: true
       }
 
@@ -54,6 +65,25 @@ function mainReducer(state: State, action: Action): State {
       return {
         ...state,
         planetsLoading: false
+      }
+
+    case 'failurePlanets':
+      return {
+        ...state,
+        planetsLoading: false,
+        planetsError: action.error
+      }
+
+    case 'removePeopleError':
+      return {
+        ...state,
+        peopleError: null
+      }
+
+    case 'removePlanetsError':
+      return {
+        ...state,
+        planetsError: null
       }
   }
 

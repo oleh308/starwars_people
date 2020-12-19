@@ -1,18 +1,21 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, ReactNode } from 'react';
 import axios from 'axios';
 import { url } from './constants/api';
 import Table from './components/table';
 import Button from './components/button';
 import Search from './components/search';
-import styles from './constants/sizes.module.scss';
+import ErrorMessage from './components/errorMessage';
 import { MainContext } from './contexts/mainContext';
 
 import './App.scss';
+import styles from './constants/sizes.module.scss';
 
 function App() {
   const {
     state: {
-      planetsMap
+      planetsMap,
+      peopleError,
+      planetsError
     },
     dispatch
   } = useContext(MainContext);
@@ -39,7 +42,10 @@ function App() {
         previousPeople: people.previous
       });
     } catch (error: any) {
-
+      dispatch({
+        type: 'failurePeople',
+        error: 'An error occurred while getting a list of people. Please try again later.'
+      });
     }
   }
 
@@ -62,11 +68,31 @@ function App() {
       if (planets.next) fetchPlanets(planets.next);
       else dispatch({ type: 'planetsFinished' });
     } catch (error: any) {
-
+      dispatch({
+        type: 'failurePlanets',
+        error: 'An error occurred while getting a list of planets. Please try again later.'
+      });
     }
   }
 
-  function getContent() {
+  function getErrors(): ReactNode[] {
+    return [
+      peopleError && <ErrorMessage
+                key={0}
+                error={peopleError}
+                classNames={styles.margin}
+                remove={() => dispatch({ type: 'removePeopleError' })}
+              />,
+      planetsError && <ErrorMessage
+                key={1}
+                error={planetsError}
+                classNames={styles.margin}
+                remove={() => dispatch({ type: 'removePlanetsError' })}
+              />
+    ];
+  }
+
+  function getContent(): ReactNode {
     if (initialLoad) {
       return (
         <main>
@@ -75,6 +101,7 @@ function App() {
             classNames={styles.margin}
             onClick={() => fetchData()}
           />
+          {getErrors()}
           <h2 className='noContent'>No content</h2>
         </main>
       );
@@ -86,6 +113,7 @@ function App() {
             classNames={styles.margin}
             onClick={() => fetchData()}
           />
+          {getErrors()}
           <Search
             update={fetchPeople}
             classNames={styles.margin}

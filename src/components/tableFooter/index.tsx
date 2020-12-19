@@ -29,12 +29,20 @@ function TableFooter() {
         };
       }, 0);
 
-      return (
-        <div className="populationResults">
-          <h3>{formatStringNumber(String(totalPopulation))}</h3>
-          {amountOfUnknown > 0 && <span>{`(${amountOfUnknown} planets unknown)`}</span>}
-        </div>
-      )
+      if (planets.length === 0) {
+        return (
+          <div className="populationResults">
+            <h3>No planets</h3>
+          </div>
+        );
+      } else {
+        return (
+          <div className="populationResults">
+            <h3>{formatStringNumber(String(totalPopulation))}</h3>
+            {amountOfUnknown > 0 && <span>{`(${amountOfUnknown} planets unknown)`}</span>}
+          </div>
+        );
+      }
     }
   }
 

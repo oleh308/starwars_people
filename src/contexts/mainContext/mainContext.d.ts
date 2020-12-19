@@ -17,13 +17,19 @@ type Action =
      planetsMap: Map<string, Planet>
    }
  | { type: 'planetsFinished' }
- | { type: 'failure', error: string };
+ | { type: 'failurePeople', error: string }
+ | { type: 'failurePlanets', error: string }
+ | { type: 'removePeopleError' }
+ | { type: 'removePlanetsError' };
+
 
 type State = {
   people: Person[]
   peopleLoading: boolean
   planetsLoading: boolean
   nextPeople: string | null
+  peopleError: string | null,
+  planetsError: string | null,
   previousPeople: string | null
   planetsMap: Map<string, Planet>
 };

@@ -17,7 +17,8 @@ type ITableRow = {
 function TableRow({ person }: ITableRow) {
   const {
     state: {
-      planetsMap
+      planetsMap,
+      planetsLoading
     }
   } = useContext(MainContext);
   const [planet, setPlanet] = useState<Planet | null>(null);
@@ -38,6 +39,8 @@ function TableRow({ person }: ITableRow) {
   function getHomeworldName(): ReactNode | string {
     if (planet) {
       return planet.name;
+    } else if (!planetsLoading) {
+      return 'Not found';
     } else {
       return <CircularProgress size='1.5em' />
     }
@@ -46,6 +49,8 @@ function TableRow({ person }: ITableRow) {
   function getHomeworldPopulation(): ReactNode | string {
     if (planet) {
       return formatStringNumber(planet.population);
+    } else if (!planetsLoading) {
+      return 'Not found';
     } else {
       return <CircularProgress size='1.5em' />
     }

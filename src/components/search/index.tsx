@@ -50,16 +50,18 @@ function Search({ update, classNames = '' }: ISearch) {
         />
         <button onClick={() => update(search)}>Search</button>
       </div>
-      <Button
-        title='Previous'
-        onClick={previous}
-        disabled={previousPeople ? false : true}
-      />
-      <Button
-        title='Next'
-        onClick={next}
-        disabled={nextPeople ? false : true}
-      />
+      <div className='buttonsWrapper'>
+        <Button
+          title='Previous'
+          onClick={previous}
+          disabled={previousPeople ? false : true}
+        />
+        <Button
+          title='Next'
+          onClick={next}
+          disabled={nextPeople ? false : true}
+        />
+      </div>
     </div>
   )
 }

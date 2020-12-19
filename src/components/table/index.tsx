@@ -39,21 +39,23 @@ function Table({ classNames }: ITable) {
   }
 
   return (
-    <table className={`peopleTable ${classNames}`}>
-      <thead>
-        <tr>
-          {headers.map((name: string, i: number) => (
-            <th key={i}>
-              <h3>{name}</h3>
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {getContent()}
-      </tbody>
-      <TableFooter />
-    </table>
+    <div className='tableWrapper'>
+      <table className={`peopleTable ${classNames}`}>
+        <thead>
+          <tr>
+            {headers.map((name: string, i: number) => (
+              <th key={i}>
+                <h3>{name}</h3>
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {getContent()}
+        </tbody>
+        <TableFooter />
+      </table>
+    </div>
   )
 }
 

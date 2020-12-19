@@ -38,7 +38,7 @@ function TableFooter() {
       } else {
         return (
           <div className="populationResults">
-            <h3>{formatStringNumber(String(totalPopulation))}</h3>
+            <h4>{formatStringNumber(String(totalPopulation))}</h4>
             {amountOfUnknown > 0 && <span>{`(${amountOfUnknown} planets unknown)`}</span>}
           </div>
         );

@@ -33,12 +33,15 @@ function Search({ update, classNames = '' }: ISearch) {
 
   return (
     <div className={`searchWrapper ${classNames}`}>
-      <input
-        type='text'
-        value={search}
-        onChange={onChange}
-        onKeyPress={onKeyPress}
-      />
+      <div className='inputWrapper'>
+        <input
+          type='text'
+          value={search}
+          onChange={onChange}
+          onKeyPress={onKeyPress}
+        />
+        <button onClick={() => update(search)}>Search</button>
+      </div>
       <Button
         title='Previous'
         onClick={previous}

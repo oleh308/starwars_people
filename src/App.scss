@@ -1,5 +1,5 @@
+@import './constants/colours.scss';
 @import './constants/sizes.module.scss';
-@import './constants/colours.scss' ;
 
 .App {
   header {
@@ -22,5 +22,19 @@
     display: flex;
     max-width: $maxContent;
     flex-direction: column;
+
+    .noContent {
+      color: $grey;
+      text-align: center;
+      margin-top: calc(#{$marginTop} * 3);
+    }
+  }
+
+  button:focus {
+    outline: none;
+  }
+
+  button:active {
+    opacity: 0.6
   }
 }

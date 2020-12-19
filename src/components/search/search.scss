@@ -4,15 +4,32 @@
   display: flex;
   flex-direction: row;
 
-  input {
+  .inputWrapper {
     flex: 5;
-    padding: 0 2%;
-    font-size: 1em;
+    display: flex;
     border-radius: 5px;
+    flex-direction: row;
     border: 1px solid $main;
 
-    &:focus {
+    input {
+      flex: 1;
+      border: none;
+      padding: 0 2%;
+      font-size: 1em;
+      background-color: transparent;
+    }
+
+    input:focus {
       outline: none;
+    }
+
+    button {
+      border: none;
+      color: $grey;
+      padding: 0 2%;
+      font-size: 1em;
+      cursor: pointer;
+      background-color: transparent;
     }
   }
 

@@ -10,9 +10,14 @@ type IButton = {
 }
 
 function Button({ title, onClick, classNames = '', disabled = false }: IButton) {
+
+  function click() {
+    if (!disabled) onClick();
+  }
+
   return (
     <button
-      onClick={onClick}
+      onClick={click}
       className={`mainButton ${classNames} ${disabled ? 'disabledButton' : ''}`}
     >
       <h3>{title}</h3>

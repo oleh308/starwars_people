@@ -35,5 +35,6 @@ type State = {
 };
 
 type MainProviderProps = {
+  init?: State
   children: ReactNode
 };

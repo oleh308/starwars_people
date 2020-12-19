@@ -39,7 +39,7 @@ function Table({ classNames }: ITable) {
   }
 
   return (
-    <div className='tableWrapper'>
+    <div className='tableWrapper' data-testid='table-container'>
       <table className={`peopleTable ${classNames}`}>
         <thead>
           <tr>

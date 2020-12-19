@@ -12,7 +12,7 @@ function ErrorMessage({ error, classNames = '', remove }: IErrorMessage) {
   return (
     <div className={`errorMessage ${classNames}`}>
       <p>{error}</p>
-      <button onClick={remove}>Remove</button>
+      <button onClick={remove} data-testid='remove-error'>Remove</button>
     </div>
   );
 }

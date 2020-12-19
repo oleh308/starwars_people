@@ -90,8 +90,8 @@ function mainReducer(state: State, action: Action): State {
   return state;
 }
 
-function MainProvider({ children }: MainProviderProps) {
-  const [state, dispatch] = useReducer(mainReducer, reducerInit);
+function MainProvider({ children, init }: MainProviderProps) {
+  const [state, dispatch] = useReducer(mainReducer, init ? init : reducerInit);
 
   return (
     <MainContext.Provider value={{ state, dispatch }}>
@@ -100,4 +100,4 @@ function MainProvider({ children }: MainProviderProps) {
   )
 }
 
-export { MainProvider, MainContext };
+export { MainProvider, MainContext, reducerInit };

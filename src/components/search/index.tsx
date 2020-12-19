@@ -39,13 +39,14 @@ function Search({ update, classNames = '' }: ISearch) {
   }
 
   return (
-    <div className={`searchWrapper ${classNames}`}>
+    <div className={`searchWrapper ${classNames}`} data-testid='search-container'>
       <div className='inputWrapper'>
         <input
           type='text'
           value={search}
           onChange={onChange}
           onKeyPress={onKeyPress}
+          data-testid='search-input'
           placeholder='Search by name'
         />
         <button onClick={() => update(search)}>Search</button>

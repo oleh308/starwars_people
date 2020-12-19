@@ -60,10 +60,10 @@ function TableRow({ person }: ITableRow) {
     <tr className="personRow">
       <td>{ person.name }</td>
       <td>{ person.birth_year }</td>
-      <td>
+      <td data-testid='row-planet-cell'>
         {getHomeworldName()}
       </td>
-      <td>
+      <td data-testid='row-population-cell'>
         {getHomeworldPopulation()}
       </td>
     </tr>

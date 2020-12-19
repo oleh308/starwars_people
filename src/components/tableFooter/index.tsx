@@ -31,13 +31,13 @@ function TableFooter() {
 
       if (planets.length === 0) {
         return (
-          <div className="populationResults">
+          <div className="populationResults" data-testid='population-results'>
             <h3>No planets</h3>
           </div>
         );
       } else {
         return (
-          <div className="populationResults">
+          <div className="populationResults" data-testid='population-results'>
             <h4>{formatStringNumber(String(totalPopulation))}</h4>
             {amountOfUnknown > 0 && <span>{`(${amountOfUnknown} planets unknown)`}</span>}
           </div>

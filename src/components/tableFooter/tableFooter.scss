@@ -5,7 +5,7 @@
   td {
     text-align: center;
   }
-  
+
   .populationLabel {
     box-sizing: border-box;
     border-left: 1px solid $main;
@@ -18,5 +18,16 @@
     border-right: 1px solid $main;
     border-bottom: 1px solid $main;
     border-bottom-right-radius: 5px;
+
+    .populationResults {
+      h3 {
+        margin: 0;
+      }
+
+      span {
+        color: $grey;
+        font-size: 0.8em;
+      }
+    }
   }
 }

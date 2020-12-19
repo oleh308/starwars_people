@@ -9,4 +9,18 @@
     color: white;
     background-color: $main
   }
+
+  .loadingRow {
+    padding: 0;
+
+    .loadingWrapper {
+      height: 200px;
+      display: flex;
+      position: relative;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid $main;
+      border-bottom-left-radius: 5px;
+    }
+  }
 }

@@ -4,7 +4,12 @@ import React, {
 } from 'react';
 
 const reducerInit: State = {
-  people: []
+  people: [],
+  nextPeople: null,
+  peopleLoading: false,
+  previousPeople: null,
+  planetsMap: new Map(),
+  planetsLoading: false
 };
 
 const contextInit: ContextState = {
@@ -19,7 +24,36 @@ function mainReducer(state: State, action: Action): State {
     case 'updatePeople':
       return {
         ...state,
-        people: action.people
+        peopleLoading: false,
+        people: action.people,
+        nextPeople: action.nextPeople,
+        previousPeople: action.previousPeople
+      }
+
+    case 'requestPeople':
+      return {
+        ...state,
+        nextPeople: null,
+        peopleLoading: true,
+        previousPeople: null,
+      }
+
+    case 'updatePlanets':
+      return {
+        ...state,
+        planetsMap: new Map(action.planetsMap)
+      }
+
+    case 'requestPlanets':
+      return {
+        ...state,
+        planetsLoading: true
+      }
+
+    case 'planetsFinished':
+      return {
+        ...state,
+        planetsLoading: false
       }
   }
 

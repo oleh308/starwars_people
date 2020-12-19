@@ -1,14 +1,21 @@
-import React, { useState, SyntheticEvent, KeyboardEvent } from 'react';
+import React, {
+  useState,
+  useContext,
+  KeyboardEvent,
+  SyntheticEvent
+} from 'react';
 import Button from '../button';
+import { MainContext } from '../../contexts/mainContext';
 
 import './search.scss';
 
 type ISearch = {
   classNames?: string
-  update: (search?: string) => void | Promise<void>
+  update: (search?: string, nextUrl?: string) => void | Promise<void>
 }
 
 function Search({ update, classNames = '' }: ISearch) {
+  const { state: { nextPeople, previousPeople } } = useContext(MainContext);
   const [search, setSearch] = useState<string>('');
 
   function onChange(e: SyntheticEvent): void {
@@ -24,11 +31,11 @@ function Search({ update, classNames = '' }: ISearch) {
   }
 
   function next() {
-
+    if (nextPeople) update('', nextPeople);
   }
 
   function previous() {
-
+    if (previousPeople) update('', previousPeople);
   }
 
   return (
@@ -39,16 +46,19 @@ function Search({ update, classNames = '' }: ISearch) {
           value={search}
           onChange={onChange}
           onKeyPress={onKeyPress}
+          placeholder='Search by name'
         />
         <button onClick={() => update(search)}>Search</button>
       </div>
       <Button
         title='Previous'
         onClick={previous}
+        disabled={previousPeople ? false : true}
       />
       <Button
         title='Next'
         onClick={next}
+        disabled={nextPeople ? false : true}
       />
     </div>
   )

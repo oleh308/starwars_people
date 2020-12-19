@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext, ReactNode } from 'react';
 import TableRow from '../tableRow';
 import TableFooter from '../tableFooter';
+import { MainContext } from '../../contexts/mainContext';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import './table.scss';
 
@@ -11,6 +13,31 @@ type ITable = {
 const headers = ['Name', 'Birth Year', 'Homeworld Name', 'Homeworld Population'];
 
 function Table({ classNames }: ITable) {
+  const {
+    state: {
+      people,
+      peopleLoading,
+    }
+  } = useContext(MainContext);
+
+  function getContent(): ReactNode | ReactNode[] {
+    if (peopleLoading) {
+      return (
+        <tr>
+          <td className="loadingRow" colSpan={headers.length}>
+            <div className="loadingWrapper">
+              <CircularProgress />
+            </div>
+          </td>
+        </tr>
+      )
+    } else {
+      return people.map((person: Person, i: number) => (
+        <TableRow key={i} person={person} />
+      ));
+    }
+  }
+
   return (
     <table className={`peopleTable ${classNames}`}>
       <thead>
@@ -23,9 +50,7 @@ function Table({ classNames }: ITable) {
         </tr>
       </thead>
       <tbody>
-        <TableRow />
-        <TableRow />
-        <TableRow />
+        {getContent()}
       </tbody>
       <TableFooter />
     </table>

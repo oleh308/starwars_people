@@ -4,12 +4,28 @@ type ContextState = {
 };
 
 type Action =
- | { type: 'request' }
- | { type: 'updatePeople', people: [any] }
+ | { type: 'requestPeople' }
+ | { type: 'requestPlanets' }
+ | {
+     type: 'updatePeople',
+     people: Person[],
+     nextPeople: string | null
+     previousPeople: string | null
+   }
+ | {
+     type: 'updatePlanets',
+     planetsMap: Map<string, Planet>
+   }
+ | { type: 'planetsFinished' }
  | { type: 'failure', error: string };
 
 type State = {
-  people: any[]
+  people: Person[]
+  peopleLoading: boolean
+  planetsLoading: boolean
+  nextPeople: string | null
+  previousPeople: string | null
+  planetsMap: Map<string, Planet>
 };
 
 type MainProviderProps = {

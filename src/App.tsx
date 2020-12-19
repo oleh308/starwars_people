@@ -10,19 +10,57 @@ import { MainContext } from './contexts/mainContext';
 import './App.scss';
 
 function App() {
+  const {
+    state: {
+      planetsMap
+    },
+    dispatch
+  } = useContext(MainContext);
   const [initialLoad, setInitialLoad] = useState<boolean>(true);
-  const { dispatch } = useContext(MainContext);
 
-  async function fetchData(search?: string): Promise<void> {
+  function fetchData() {
     if (initialLoad) setInitialLoad(false);
+    fetchPeople();
+    fetchPlanets();
+  }
+
+  async function fetchPeople(search?: string, nextUrl?: string) {
+    dispatch({ type: 'requestPeople' });
 
     try {
-      const people = (await axios.get(url + '/people')).data;
-      const planets = (await axios.get(url + '/planets')).data;
+      const requestUrl = nextUrl ? nextUrl : url + `/people${search ? '/?search=' + search : ''}`;
 
-      console.log(people);
-      console.log(planets);
-      dispatch({ type: 'updatePeople', people: people.results });
+      const people = (await axios.get(requestUrl)).data;
+
+      dispatch({
+        type: 'updatePeople',
+        people: people.results,
+        nextPeople: people.next,
+        previousPeople: people.previous
+      });
+    } catch (error: any) {
+
+    }
+  }
+
+  async function fetchPlanets(nextUrl?: string) {
+    if (!nextUrl) dispatch({ type: 'requestPlanets' });
+
+    try {
+      const requestUrl = nextUrl ? nextUrl : url + '/planets';
+      const planets = (await axios.get(requestUrl)).data;
+
+      planets.results.forEach((planet: Planet) => {
+        planetsMap.set(planet.url, planet);
+      });
+
+      dispatch({
+        type: 'updatePlanets',
+        planetsMap: planetsMap
+      });
+
+      if (planets.next) fetchPlanets(planets.next);
+      else dispatch({ type: 'planetsFinished' });
     } catch (error: any) {
 
     }
@@ -49,7 +87,7 @@ function App() {
             onClick={() => fetchData()}
           />
           <Search
-            update={fetchData}
+            update={fetchPeople}
             classNames={styles.margin}
           />
           <Table

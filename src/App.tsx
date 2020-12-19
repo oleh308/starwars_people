@@ -2,6 +2,9 @@ import React, { useContext } from 'react';
 import axios from 'axios';
 import { url } from './constants/api';
 import Table from './components/table';
+import Button from './components/button';
+import Search from './components/search';
+import styles from './constants/sizes.module.scss';
 import { MainContext } from './contexts/mainContext';
 
 import './App.scss';
@@ -9,7 +12,7 @@ import './App.scss';
 function App() {
   const { state: { people }, dispatch } = useContext(MainContext);
 
-  async function fetchData(): Promise<void> {
+  async function fetchData(search?: string): Promise<void> {
     try {
       const people = (await axios.get(url + '/people')).data;
       const planets = (await axios.get(url + '/planets')).data;
@@ -24,9 +27,23 @@ function App() {
 
   return (
     <div className="App">
-      <button onClick={fetchData}>Fetch</button>
-      <Table />
-      <h3>{people.length}</h3>
+      <header>
+        <h1>Star Wars list</h1>
+      </header>
+      <main>
+        <Button
+          title={'Load data'}
+          classNames={styles.margin}
+          onClick={() => fetchData()}
+        />
+        <Search
+          update={fetchData}
+          classNames={styles.margin}
+        />
+        <Table
+          classNames={styles.margin}
+        />
+      </main>
     </div>
   );
 }

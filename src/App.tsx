@@ -1,9 +1,9 @@
 import React, { useContext, useState, ReactNode } from 'react';
-import axios from 'axios';
-import { url } from './constants/api';
 import Table from './components/table';
 import Button from './components/button';
 import Search from './components/search';
+import { getPeople } from './api/people';
+import { getPlanets } from './api/planets';
 import ErrorMessage from './components/errorMessage';
 import { MainContext } from './contexts/mainContext';
 
@@ -31,9 +31,7 @@ function App() {
     dispatch({ type: 'requestPeople' });
 
     try {
-      const requestUrl = nextUrl ? nextUrl : url + `/people${search ? '/?search=' + search : ''}`;
-
-      const people = (await axios.get(requestUrl)).data;
+      const people = (await getPeople(search, nextUrl)).data;
 
       dispatch({
         type: 'updatePeople',
@@ -53,8 +51,7 @@ function App() {
     if (!nextUrl) dispatch({ type: 'requestPlanets' });
 
     try {
-      const requestUrl = nextUrl ? nextUrl : url + '/planets';
-      const planets = (await axios.get(requestUrl)).data;
+      const planets = (await getPlanets(nextUrl)).data;
 
       planets.results.forEach((planet: Planet) => {
         planetsMap.set(planet.url, planet);

@@ -11,7 +11,7 @@ import './search.scss';
 
 type ISearch = {
   classNames?: string
-  update: (search?: string, nextUrl?: string) => void | Promise<void>
+  update: (params: ApiParams) => void | Promise<void>
 }
 
 function Search({ update, classNames = '' }: ISearch) {
@@ -26,16 +26,16 @@ function Search({ update, classNames = '' }: ISearch) {
 
   function onKeyPress(e: KeyboardEvent): void {
     if (e.key === 'Enter') {
-      update(search);
+      update({ search });
     }
   }
 
   function next() {
-    if (nextPeople) update('', nextPeople);
+    if (nextPeople) update({ nextUrl: nextPeople });
   }
 
   function previous() {
-    if (previousPeople) update('', previousPeople);
+    if (previousPeople) update({ nextUrl: previousPeople });
   }
 
   return (
@@ -51,7 +51,7 @@ function Search({ update, classNames = '' }: ISearch) {
         />
         <button
           data-testid='search-button'
-          onClick={() => update(search)}
+          onClick={() => update({ search })}
         >
           Search
         </button>

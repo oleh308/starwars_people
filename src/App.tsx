@@ -23,15 +23,15 @@ function App() {
 
   function fetchData() {
     if (initialLoad) setInitialLoad(false);
-    fetchPeople();
-    fetchPlanets();
+    fetchPeople({});
+    fetchPlanets({});
   }
 
-  async function fetchPeople(search?: string, nextUrl?: string) {
+  async function fetchPeople(params: ApiParams) {
     dispatch({ type: 'requestPeople' });
 
     try {
-      const people = (await getPeople(search, nextUrl)).data;
+      const people = (await getPeople(params)).data;
       dispatch({
         type: 'updatePeople',
         people: people.results,
@@ -46,11 +46,11 @@ function App() {
     }
   }
 
-  async function fetchPlanets(nextUrl?: string) {
-    if (!nextUrl) dispatch({ type: 'requestPlanets' });
+  async function fetchPlanets(params: ApiParams) {
+    if (!params.nextUrl) dispatch({ type: 'requestPlanets' });
 
     try {
-      const planets = (await getPlanets(nextUrl)).data;
+      const planets = (await getPlanets(params)).data;
 
       planets.results.forEach((planet: Planet) => {
         planetsMap.set(planet.url, planet);
@@ -61,7 +61,7 @@ function App() {
         planetsMap: planetsMap
       });
 
-      if (planets.next) fetchPlanets(planets.next);
+      if (planets.next) fetchPlanets({ nextUrl: planets.next });
       else dispatch({ type: 'planetsFinished' });
     } catch (error: any) {
       dispatch({

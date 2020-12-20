@@ -1,10 +1,12 @@
 import React, { ReactNode } from 'react';
 import TableFooter from './index';
 import { people, planetsMap } from '../../data/testData';
-import { render, screen, fireEvent } from '@testing-library/react';
 import { MainProvider, reducerInit } from '../../contexts/mainContext';
+import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 
 describe('TableFooter testing', () => {
+  afterEach(cleanup);
+
   const contextRender = (tableFooter: ReactNode, isEmpty: boolean) => {
     const state = {
       ...reducerInit,
@@ -15,7 +17,7 @@ describe('TableFooter testing', () => {
     return render(<MainProvider init={state}>{tableFooter}</MainProvider>);
   }
 
-  it('should have a basic table footer', () => {
+  it('Must render all inner components of footer and calculate right amount', () => {
     contextRender(
       <table>
         <TableFooter />
@@ -29,7 +31,7 @@ describe('TableFooter testing', () => {
     expect(amountElement).toBeInTheDocument();
   });
 
-  it('should have a amount as no planets', () => {
+  it('Must render all inner components of footer and show no planets', () => {
     contextRender(
       <table>
         <TableFooter />

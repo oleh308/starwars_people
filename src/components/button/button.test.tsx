@@ -1,20 +1,22 @@
 import React from 'react';
 import Button from './index';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 
 describe('Button testing', () => {
-  it('should have basic button', () => {
+  afterEach(cleanup);
+
+  it('Must render a button', () => {
     render(
       <Button
         title='Click me'
         onClick={() => {}}
       />
     );
-    const buttonElement = screen.getByText(/Click me/i);
+    const buttonElement = screen.getByTestId('button-clickme');
     expect(buttonElement).toBeInTheDocument();
   });
 
-  it('should click button', () => {
+  it('Must render a button and trigger a callback', () => {
     const onClick = jest.fn();
 
     render(
@@ -23,12 +25,12 @@ describe('Button testing', () => {
         onClick={onClick}
       />
     );
-    const buttonElement = screen.getByText(/Click me/i);
+    const buttonElement = screen.getByTestId('button-clickme');
     fireEvent.click(buttonElement);
     expect(onClick).toHaveBeenCalled();
   });
 
-  it('should not be able to click button', () => {
+  it('Must render a disabled button', () => {
     const onClick = jest.fn();
 
     render(
@@ -38,8 +40,10 @@ describe('Button testing', () => {
         onClick={onClick}
       />
     );
-    const buttonElement = screen.getByText(/Click me/i);
+    const buttonElement = screen.getByTestId('button-clickme');
+
     fireEvent.click(buttonElement);
     expect(onClick).not.toHaveBeenCalled();
+    expect(buttonElement).toBeDisabled();
   });
 })

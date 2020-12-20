@@ -58,8 +58,12 @@ function TableRow({ person }: ITableRow) {
 
   return (
     <tr className="personRow">
-      <td>{ person.name }</td>
-      <td>{ person.birth_year }</td>
+      <td data-testid='row-name-cell'>
+        { person.name }
+      </td>
+      <td data-testid='row-birth-cell'>
+        { person.birth_year }
+      </td>
       <td data-testid='row-planet-cell'>
         {getHomeworldName()}
       </td>

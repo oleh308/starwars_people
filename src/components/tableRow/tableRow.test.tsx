@@ -1,11 +1,12 @@
 import React, { ReactNode } from 'react';
 import TableRow from './index';
 import { people, planetsMap } from '../../data/testData';
-import { render, screen, fireEvent } from '@testing-library/react';
 import { MainProvider, reducerInit } from '../../contexts/mainContext';
-
+import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 
 describe('TableRow testing', () => {
+  afterEach(cleanup);
+
   const contextRender = (tableRow: ReactNode) => {
     const state = {
       ...reducerInit,
@@ -16,7 +17,7 @@ describe('TableRow testing', () => {
     return render(<MainProvider init={state}>{tableRow}</MainProvider>);
   }
 
-  it('should have a basic row with no planet found', () => {
+  it('Must render a row with no home planet found', () => {
     render(
       <table>
         <tbody>
@@ -26,15 +27,15 @@ describe('TableRow testing', () => {
     );
 
     const lisaElement = screen.getByText('Lisa');
-    const noFoundElement1 = screen.getByTestId('row-planet-cell');
-    const noFoundElement2 = screen.getByTestId('row-population-cell');
+    const birthElement = screen.getByText('year');
+    const notFoundElements = screen.getAllByText('Not found');
 
+    expect(notFoundElements.length).toBe(2);
     expect(lisaElement).toBeInTheDocument();
-    expect(noFoundElement1).toBeInTheDocument();
-    expect(noFoundElement2).toBeInTheDocument();
+    expect(birthElement).toBeInTheDocument();
   });
 
-  it('should have a basic row with planet found', () => {
+  it('Must render a row with home planet found', () => {
     contextRender(
       <table>
         <tbody>
@@ -44,11 +45,13 @@ describe('TableRow testing', () => {
     );
 
     const lisaElement = screen.getByText('Lisa');
-    const planetElement1 = screen.getByText('Earth');
-    const populationElement2 = screen.getByText('7,000,000,000');
+    const birthElement = screen.getByText('year');
+    const planetElement = screen.getByText('Earth');
+    const populationElement = screen.getByText('7,000,000,000');
 
     expect(lisaElement).toBeInTheDocument();
-    expect(planetElement1).toBeInTheDocument();
-    expect(populationElement2).toBeInTheDocument();
+    expect(birthElement).toBeInTheDocument();
+    expect(planetElement).toBeInTheDocument();
+    expect(populationElement).toBeInTheDocument();
   });
 })

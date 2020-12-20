@@ -32,7 +32,6 @@ function App() {
 
     try {
       const people = (await getPeople(search, nextUrl)).data;
-
       dispatch({
         type: 'updatePeople',
         people: people.results,

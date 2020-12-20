@@ -50,7 +50,7 @@ function Table({ classNames }: ITable) {
             ))}
           </tr>
         </thead>
-        <tbody>
+        <tbody data-testid='table-body'>
           {getContent()}
         </tbody>
         <TableFooter />

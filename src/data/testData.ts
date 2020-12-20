@@ -1,4 +1,4 @@
-export const people: Person[] = [
+const people: Person[] = [
   {
     birth_year: 'year',
     created: 'created_Data',
@@ -37,8 +37,8 @@ export const people: Person[] = [
   },
 ]
 
-export const planetsMap: Map<string, Planet> = new Map([
-  ['homeworld_id', {
+const planets = [
+  {
     climate: 'dry',
     created: 'created_date',
     diameter: '100',
@@ -53,21 +53,28 @@ export const planetsMap: Map<string, Planet> = new Map([
     surface_water: 'sea',
     terrain: 'wild',
     url: 'homeworld_id'
-  }],
-  ['homeworld_id2', {
-    climate: 'dry',
-    created: 'created_date',
-    diameter: '200',
-    edited: 'edited_date',
-    films: [],
-    gravity: 'strong',
-    name: 'Mars',
-    orbital_period: 'random',
-    population: '0',
-    residents: [],
-    rotation_period: 'period',
-    surface_water: 'no',
-    terrain: 'very wild',
-    url: 'homeworld_id2'
-  }]
+  },
+  {
+   climate: 'dry',
+   created: 'created_date',
+   diameter: '200',
+   edited: 'edited_date',
+   films: [],
+   gravity: 'strong',
+   name: 'Mars',
+   orbital_period: 'random',
+   population: '0',
+   residents: [],
+   rotation_period: 'period',
+   surface_water: 'no',
+   terrain: 'very wild',
+   url: 'homeworld_id2'
+ }
+];
+
+const planetsMap: Map<string, Planet> = new Map([
+  ['homeworld_id', planets[0]],
+  ['homeworld_id2', planets[1]]
 ]);
+
+export { people, planets, planetsMap };

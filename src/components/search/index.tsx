@@ -49,7 +49,12 @@ function Search({ update, classNames = '' }: ISearch) {
           data-testid='search-input'
           placeholder='Search by name'
         />
-        <button onClick={() => update(search)}>Search</button>
+        <button
+          data-testid='search-button'
+          onClick={() => update(search)}
+        >
+          Search
+        </button>
       </div>
       <div className='buttonsWrapper'>
         <Button

@@ -13,15 +13,15 @@
     width: 100%;
     text-align: center;
   }
-}
 
-.disabledButton {
-  color: $grey;
-  border-color: $grey;
-  pointer-events: none;
-  cursor: not-allowed !important;
+  &:disabled {
+    color: $grey;
+    border-color: $grey;
+    pointer-events: none;
+    cursor: not-allowed !important;
 
-  &:active {
-    opacity: 1 !important
+    &:active {
+      opacity: 1 !important
+    }
   }
 }

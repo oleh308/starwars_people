@@ -18,7 +18,9 @@ function Button({ title, onClick, classNames = '', disabled = false }: IButton) 
   return (
     <button
       onClick={click}
-      className={`mainButton ${classNames} ${disabled ? 'disabledButton' : ''}`}
+      disabled={disabled}
+      className={`mainButton ${classNames}`}
+      data-testid={`button-${title.replace(/\s/g, '').toLowerCase()}`}
     >
       <h3>{title}</h3>
     </button>

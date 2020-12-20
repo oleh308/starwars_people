@@ -1,4 +1,7 @@
-import React, { useContext, ReactNode } from 'react';
+import React, {
+  ReactNode,
+  useContext,
+} from 'react';
 import TableRow from '../tableRow';
 import TableFooter from '../tableFooter';
 import { MainContext } from '../../contexts/mainContext';
@@ -39,8 +42,11 @@ function Table({ classNames }: ITable) {
   }
 
   return (
-    <div className='tableWrapper' data-testid='table-container'>
-      <table className={`peopleTable ${classNames}`}>
+    <div
+      data-testid='table-container'
+      className={`tableWrapper ${classNames}`}
+    >
+      <table className='peopleTable'>
         <thead>
           <tr>
             {headers.map((name: string, i: number) => (

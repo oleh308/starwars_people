@@ -16,7 +16,7 @@
 
       tr {
         th {
-          padding: 0;
+          padding: 0 2%;
           background-color: $main;
 
           &:first-child {
@@ -35,6 +35,10 @@
           font-size: 1em;
         }
       }
+    }
+
+    th, td {
+      white-space: nowrap
     }
 
     .loadingRow {

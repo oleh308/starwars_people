@@ -2,7 +2,8 @@ import React, {
   useState,
   ReactNode,
   useEffect,
-  useContext
+  useContext,
+  useCallback
 } from 'react';
 import { formatStringNumber } from '../../utils/format';
 import { MainContext } from '../../contexts/mainContext';
@@ -23,18 +24,14 @@ function TableRow({ person }: ITableRow) {
   } = useContext(MainContext);
   const [planet, setPlanet] = useState<Planet | null>(null);
 
-  function checkForPlanet() {
+  const checkForPlanet = useCallback(() => {
     const planet = planetsMap.get(person.homeworld);
     if (planet) setPlanet(planet);
-  }
+  }, [person, planetsMap])
 
   useEffect(() => {
     checkForPlanet();
-  }, []);
-
-  useEffect(() => {
-    checkForPlanet();
-  }, [planetsMap]);
+  }, [checkForPlanet]);
 
   function getHomeworldName(): ReactNode | string {
     if (planet) {

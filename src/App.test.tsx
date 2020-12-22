@@ -19,7 +19,7 @@ describe('App testing', () => {
         const data = people.filter((person: Person) => (
           person.name.toLowerCase().includes(search.toLowerCase())
         ));
-        conosle.log(data.length)
+
         return {
           data: {
             previous: null,

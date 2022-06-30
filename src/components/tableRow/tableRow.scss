@@ -1,0 +1,21 @@
+@import '../../constants/colours.scss';
+
+.personRow {
+  height: 40px;
+
+  td {
+    text-align: center;
+    border-left: 1px solid $main;
+    border-bottom: 1px solid $main;
+
+    &:last-child {
+      border-right: 1px solid $main;
+    }
+  }
+
+  &:last-child {
+    td:first-child {
+      border-bottom-left-radius: 5px;
+    }
+  }
+}

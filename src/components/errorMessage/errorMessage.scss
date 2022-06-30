@@ -1,0 +1,23 @@
+@import '../../constants/colours.scss';
+
+.errorMessage {
+  flex: 1;
+  color: $red;
+  display: flex;
+  border-radius: 3px;
+  flex-direction: row;
+  border: 1px dashed $red;
+
+  p {
+    flex: 1;
+    text-align: center;
+  }
+
+  button {
+    border: none;
+    color: $grey;
+    cursor: pointer;
+    font-weight: 600;
+    background-color: transparent;
+  }
+}

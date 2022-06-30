@@ -1,0 +1,73 @@
+@import '../../constants/mixins.scss';
+@import '../../constants/colours.scss';
+@import '../../constants/sizes.module.scss';
+
+.searchWrapper {
+  display: flex;
+  flex-direction: row;
+
+  @include mobile {
+    flex-direction: column;
+
+    .inputWrapper {
+      height: 50px;
+      margin-right: 0 !important;
+    }
+
+    .buttonsWrapper {
+      margin-top: $marginTop;
+    }
+  }
+
+  .inputWrapper {
+    flex: 5;
+    display: flex;
+    border-radius: 5px;
+    flex-direction: row;
+    border: 1px solid $main;
+
+    input {
+      flex: 1;
+      border: none;
+      padding: 0 2%;
+      font-size: 1em;
+      background-color: transparent;
+    }
+
+    input:focus {
+      outline: none;
+    }
+
+    input::placeholder {
+      color: $grey;
+    }
+
+    button {
+      border: none;
+      color: $main;
+      padding: 0 2%;
+      font-size: 1em;
+      cursor: pointer;
+      background-color: transparent;
+    }
+  }
+
+  .buttonsWrapper {
+    flex: 2;
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+
+    :not(:last-child) {
+      margin-right: 3%;
+    }
+
+    button {
+      flex: 1;
+    }
+  }
+
+  :not(:last-child) {
+    margin-right: 1%;
+  }
+}

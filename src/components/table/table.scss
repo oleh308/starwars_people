@@ -1,0 +1,59 @@
+@import '../../constants/mixins.scss';
+@import '../../constants/colours.scss';
+
+.tableWrapper {
+  width: 100%;
+  overflow-x: scroll;
+
+  .peopleTable {
+    min-width: 100%;
+    border-spacing: 0;
+    border-radius: 5px;
+    table-layout: fixed;
+
+    thead {
+      color: white;
+
+      tr {
+        th {
+          padding: 0 2%;
+          background-color: $main;
+
+          &:first-child {
+            border-top-left-radius: 5px;
+          }
+
+          &:last-child {
+            border-top-right-radius: 5px;
+          }
+        }
+
+      }
+
+      @include mobile {
+        h3 {
+          font-size: 1em;
+        }
+      }
+    }
+
+    th, td {
+      white-space: nowrap
+    }
+
+    .loadingRow {
+      padding: 0;
+
+      .loadingWrapper {
+        height: 400px;
+        display: flex;
+        position: relative;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid $main;
+        border-bottom-left-radius: 5px;
+      }
+    }
+  }
+
+}

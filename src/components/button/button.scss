@@ -1,0 +1,27 @@
+@import '../../constants/colours.scss';
+
+.mainButton {
+  flex: 1;
+  color: $main;
+  display: flex;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid $main;
+  background-color: transparent;
+
+  h3 {
+    width: 100%;
+    text-align: center;
+  }
+
+  &:disabled {
+    color: $grey;
+    border-color: $grey;
+    pointer-events: none;
+    cursor: not-allowed !important;
+
+    &:active {
+      opacity: 1 !important
+    }
+  }
+}
